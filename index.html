@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Konfigurator dysz opryskiwacza sadowniczego</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style>
+        :root {
+            --bg: #f6f8fb;
+            --panel-bg: #fff;
+            --section-bg: #f4f8fc;
+            --input-bg: #fafdff;
+            --border: #d6e3ef;
+            --accent: #233c70;
+            --primary: #3792ee;
+            --green: #22bc91;
+            --red: #ef5350;
+            --gray: #7a8497;
+            --label: #2d3752;
+            --shadow: 0 8px 36px #d3defa33;
+        }
+        html, body {
+            background: var(--bg);
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+            color: var(--label);
+        }
+        .main-container {
+            background: var(--panel-bg);
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            margin: 2.5em auto 1em;
+            padding: 2em 1.2em 1.3em 1.2em;
+            max-width: 460px;
+        }
+        h1 {
+            text-align: center;
+            color: var(--accent);
+            font-weight: 800;
+            font-size: 1.18em;
+            letter-spacing: .01em;
+            margin: 0 0 1.18em 0;
+        }
+        .row {
+            display: flex;
+            gap: .7em;
+            margin-bottom: .68em;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .col {
+            background: var(--input-bg);
+            border: 1.3px solid var(--border);
+            border-radius: 13px;
+            box-shadow: 0 1px 7px #e2e8f033;
+            padding: .6em 1em .5em 1em;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            min-width: 110px;
+            flex: 1 1 145px;
+            max-width: 200px;
+        }
+        .label {
+            color: var(--label);
+            font-size: 1em;
+            font-weight: 600;
+            margin-bottom: 0.23em;
+        }
+        .param-arrows {
+            display: flex;
+            align-items: center;
+            gap: 0.18em;
+            width: 100%;
+        }
+        .arrow-btn {
+            background: var(--panel-bg);
+            border: 1.1px solid var(--border);
+            color: var(--accent);
+            border-radius: 50%;
+            width: 34px;
+            height: 34px;
+            font-size: 1.24em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background .13s, border-color .13s, color .12s;
+            box-shadow: 0 1px 5px #e2e8f077;
+            touch-action: manipulation;
+        }
+        .arrow-btn:active, .arrow-btn:hover {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+        .input, input[type="number"] {
+            font-size: 1.13em;
+            border-radius: 8px;
+            border: 1.1px solid var(--border);
+            background: var(--panel-bg);
+            color: var(--label);
+            padding: .33em .85em;
+            width: 70px;
+            text-align: center;
+            margin-bottom: 0.05em;
+            transition: border .17s;
+        }
+        .input:focus { border-color: var(--primary); outline: none;}
+        .small-note { color: var(--gray); font-size: .93em;}
+        .section-area {
+            margin-top: 1.15em;
+            margin-bottom: 1.12em;
+            padding: 1.15em .65em 1.05em .65em;
+            border-radius: 17px;
+            background: var(--section-bg);
+            border: 1.2px solid var(--border);
+            box-shadow: 0 2px 16px #b8cbe733;
+        }
+        .section-header-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: .68em;
+            gap: 0.7em;
+        }
+        .section-header {
+            color: var(--accent);
+            font-size: 1.13em;
+            font-weight: 700;
+            letter-spacing: .01em;
+            text-align: left;
+            flex: 1 1 auto;
+        }
+        .add-btn {
+            background: var(--green);
+            color: #fff;
+            font-weight: 700;
+            border: none;
+            border-radius: 8px;
+            padding: 0.34em 1.11em;
+            font-size: 1.08em;
+            cursor: pointer;
+            box-shadow: 0 1px 7px #d1fae0a0;
+            transition: background .13s;
+        }
+        .add-btn:disabled { opacity: 0.6; cursor: not-allowed; background: #a4c9bc;}
+        .add-btn:hover:not(:disabled) { background: #18916d; }
+        .vertical-sections {
+            display: flex;
+            flex-direction: column;
+            gap: .57em;
+            align-items: stretch;
+            margin-bottom: .5em;
+        }
+        .section-row {
+            display: flex;
+            gap: .31em;
+            align-items: center;
+            justify-content: center;
+            background: #f9fcff;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            padding: .36em .54em .35em .54em;
+            box-shadow: 0 1px 8px #e5eefa12;
+            flex-wrap: wrap;
+        }
+        .section-title {
+            color: var(--accent);
+            font-size: 1em;
+            font-weight: 700;
+            min-width: 62px;
+            margin-right: .18em;
+        }
+        .tile-group {
+            display: flex;
+            gap: .25em;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .tile-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 58px;
+            background: #f3f6fb;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            padding: .19em .14em .18em .14em;
+            margin-bottom: 0.09em;
+        }
+        .tile-label {
+            color: var(--gray);
+            font-size: .92em;
+            margin-bottom: 0.10em;
+        }
+        .tile-arrows {
+            display: flex;
+            align-items: center;
+            gap: 0.21em;
+        }
+        .tile-value {
+            font-size: 1.11em;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 0 .24em;
+            min-width: 22px;
+        }
+        .section-btn-space {
+            min-width: 76px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .del-btn {
+            background: var(--red);
+            color: #fff;
+            border: none;
+            border-radius: 7px;
+            padding: 0.18em .63em;
+            font-size: .97em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background .14s;
+            margin: 0 .18em;
+        }
+        .del-btn:hover { background: #d21e1e; }
+        .result-box {
+            background: #fafdff;
+            border-radius: 13px;
+            margin-top: 1.17em;
+            padding: .56em .6em .66em .6em;
+            border: 1.2px solid var(--border);
+            font-size: 1.05em;
+            color: var(--accent);
+            box-shadow: 0 1px 10px #d4e8ff44;
+            text-align: center;
+            min-height: 30px;
+            line-height: 1.35em;
+        }
+        .pressure-table {
+            margin: 1.6em 0 0 0;
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.98em;
+        }
+        .pressure-table th, .pressure-table td {
+            padding: 0.36em 0.34em;
+            text-align: center;
+        }
+        .pressure-table th {
+            background: #eaf1fa;
+            color: #222;
+            border-bottom: 1.5px solid #d3e2f5;
+            font-weight: 600;
+            letter-spacing: .01em;
+        }
+        .pressure-table td {
+            border-bottom: 1px solid #eef3f9;
+            color: #273859;
+        }
+        .pressure-table tr:last-child td { border-bottom: none; }
+        .pressure-ok { color: #21a272; font-weight: 700; }
+        .pressure-nok { color: #e35b48; font-weight: 500; }
+        .unit-switch { margin-left: 0.5em; user-select: none; }
+        .unit-switch-btn {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            padding: 0.09em 0.5em;
+            background: #fafdff;
+            color: #3764ac;
+            font-size: .99em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background .14s, color .13s;
+        }
+        .unit-switch-btn.selected { background: var(--primary); color: #fff; border-color: var(--primary);}
+        .unit-switch-btn:not(:last-child) { margin-right: .22em; }
+        /* --- RESPONSYWNOŚĆ --- */
+        @media (max-width: 700px) {
+            .main-container { max-width: 98vw; padding: 1.2em 0.15em 1.2em 0.15em; }
+        }
+        @media (max-width: 540px) {
+            h1 { font-size: 1em;}
+            .main-container { border-radius: 0; padding: .6em 0.03em .6em 0.03em; }
+            .row { gap: .16em; margin-bottom: .4em;}
+            .col { min-width: 0; max-width: none; width: 97vw;}
+            .section-row { gap: .13em; }
+            .section-header { font-size: .98em;}
+            .tile-group { flex-wrap: wrap; gap: .10em;}
+            .add-btn { padding: 0.22em .61em; font-size: 0.99em;}
+            .tile-label { font-size: .87em;}
+            .result-box { font-size: 0.95em; padding: .32em .12em .42em .12em;}
+            .pressure-table th, .pressure-table td { font-size: 0.95em; padding: 0.19em 0.05em;}
+        }
+    </style>
+</head>
+<body>
+<div class="main-container">
+    <h1>Konfigurator dysz<br>opryskiwacza sadowniczego</h1>
+    <form id="paramForm" autocomplete="off">
+        <div class="row">
+            <div class="col">
+                <span class="label">Dawka cieczy</span>
+                <div class="param-arrows">
+                    <button type="button" class="arrow-btn" onclick="changeVal('dose',1)">&uarr;</button>
+                    <input type="number" min="50" max="3000" step="1" id="doseInput" class="input" value="500"/>
+                    <button type="button" class="arrow-btn" onclick="changeVal('dose',-1)">&darr;</button>
+                </div>
+                <span class="small-note">l/ha</span>
+            </div>
+            <div class="col">
+                <span class="label" style="font-size:.96em">Rozstaw rzędów</span>
+                <div class="param-arrows">
+                    <button type="button" class="arrow-btn" onclick="changeVal('rowSpacing',0.1)">&uarr;</button>
+                    <input type="number" min="2.0" max="7.0" step="0.1" id="rowSpacingInput" class="input" value="3.5"/>
+                    <button type="button" class="arrow-btn" onclick="changeVal('rowSpacing',-0.1)">&darr;</button>
+                </div>
+                <span class="small-note">m</span>
+            </div>
+        </div>
+        <div class="row" style="margin-bottom:1em;">
+            <div class="col">
+                <span class="label">Prędkość</span>
+                <div class="param-arrows" style="margin-bottom:.18em;">
+                    <button type="button" class="arrow-btn" id="speedUpBtn">&uarr;</button>
+                    <input type="number" min="1" max="20" step="0.1" id="speedInput" class="input" value="6.7"/>
+                    <button type="button" class="arrow-btn" id="speedDownBtn">&darr;</button>
+                    <span class="unit-switch">
+                        <button type="button" class="unit-switch-btn" id="unitKmhBtn">km/h</button>
+                        <button type="button" class="unit-switch-btn" id="unitMsBtn">m/s</button>
+                    </span>
+                </div>
+                <span class="small-note" id="speedUnitLabel">km/h</span>
+            </div>
+        </div>
+        <div class="section-area">
+            <div class="section-header-row">
+                <span class="section-header">Konfiguracja dysz</span>
+                <button type="button" class="add-btn" onclick="addSection()" id="addBtn">+ Dodaj sekcję</button>
+            </div>
+            <div class="vertical-sections" id="sectionPanel"></div>
+        </div>
+        <div class="result-box" id="resultBox"></div>
+        <div id="pressureGuide"></div>
+    </form>
+</div>
+<script>
+    const nozzles = [
+      {color:"biały",flow5:0.27,flow6:0.29,flow7:0.32,flow8:0.34,flow9:0.36,flow10:0.38,flow11:0.39,flow12:0.41,flow13:0.43,flow14:0.44,flow15:0.46,flow16:0.47,flow17:0.48,flow18:0.50,flow19:0.51,flow20:0.52,flow21:0.54,flow22:0.55,flow23:0.56,flow24:0.57,flow25:0.58},
+      {color:"fioletowy",flow5:0.36,flow6:0.39,flow7:0.42,flow8:0.45,flow9:0.48,flow10:0.50,flow11:0.52,flow12:0.55,flow13:0.57,flow14:0.59,flow15:0.61,flow16:0.63,flow17:0.64,flow18:0.68,flow19:0.68,flow20:0.70,flow21:0.71,flow22:0.72,flow23:0.74,flow24:0.76,flow25:0.77},
+      {color:"brązowy",flow5:0.48,flow6:0.52,flow7:0.56,flow8:0.60,flow9:0.64,flow10:0.67,flow11:0.70,flow12:0.73,flow13:0.76,flow14:0.79,flow15:0.81,flow16:0.84,flow17:0.86,flow18:0.91,flow19:0.91,flow20:0.93,flow21:0.95,flow22:0.97,flow23:1.00,flow24:1.02,flow25:1.04},
+      {color:"żółty",flow5:0.73,flow6:0.80,flow7:0.86,flow8:0.92,flow9:0.97,flow10:1.03,flow11:1.07,flow12:1.12,flow13:1.17,flow14:1.21,flow15:1.25,flow16:1.29,flow17:1.33,flow18:1.37,flow19:1.40,flow20:1.44,flow21:1.48,flow22:1.52,flow23:1.54,flow24:1.58,flow25:1.61},
+      {color:"pomarańczowy",flow5:0.99,flow6:1.08,flow7:1.17,flow8:1.24,flow9:1.32,flow10:1.39,flow11:1.45,flow12:1.51,flow13:1.57,flow14:1.63,flow15:1.69,flow16:1.74,flow17:1.79,flow18:1.84,flow19:1.89,flow20:1.94,flow21:1.99,flow22:2.03,flow23:2.07,flow24:2.12,flow25:2.16},
+      {color:"czerwony",flow5:1.38,flow6:1.51,flow7:1.62,flow8:1.73,flow9:1.83,flow10:1.92,flow11:2.01,flow12:2.09,flow13:2.17,flow14:2.25,flow15:2.33,flow16:2.40,flow17:2.47,flow18:2.54,flow19:2.60,flow20:2.67,flow21:2.73,flow22:2.79,flow23:2.85,flow24:2.91,flow25:2.97},
+      {color:"szary",flow5:1.50,flow6:1.63,flow7:1.76,flow8:1.87,flow9:1.98,flow10:2.08,flow11:2.17,flow12:2.26,flow13:2.35,flow14:2.43,flow15:2.51,flow16:2.59,flow17:2.67,flow18:2.74,flow19:2.81,flow20:2.88,flow21:2.95,flow22:3.02,flow23:3.07,flow24:3.14,flow25:3.20},
+      {color:"zielony",flow5:1.78,flow6:1.94,flow7:2.09,flow8:2.22,flow9:2.35,flow10:2.47,flow11:2.58,flow12:2.69,flow13:2.79,flow14:2.89,flow15:2.99,flow16:3.08,flow17:3.17,flow18:3.25,flow19:3.34,flow20:3.42,flow21:3.50,flow22:3.57,flow23:3.65,flow24:3.72,flow25:3.80},
+      {color:"czarny",flow5:2.00,flow6:2.18,flow7:2.36,flow8:2.50,flow9:2.64,flow10:2.78,flow11:2.90,flow12:3.03,flow13:3.14,flow14:3.26,flow15:3.36,flow16:3.47,flow17:3.57,flow18:3.66,flow19:3.76,flow20:3.85,flow21:3.94,flow22:4.03,flow23:4.12,flow24:4.20,flow25:4.28},
+      {color:"niebieski",flow5:2.45,flow6:2.67,flow7:2.87,flow8:3.06,flow9:3.24,flow10:3.50,flow11:3.65,flow12:3.80,flow13:3.94,flow14:4.09,flow15:4.12,flow16:4.25,flow17:4.37,flow18:4.50,flow19:4.61,flow20:4.74,flow21:4.85,flow22:4.97,flow23:5.05,flow24:5.20,flow25:5.25}
+    ];
+    let state = {
+        dose: 500, speed: 6.7, rowSpacing: 3.5, speedUnit: "kmh",
+        sections: [ { nozzles: 5 }, { nozzles: 5 } ]
+    };
+    function updateAddBtn() { document.getElementById('addBtn').disabled = state.sections.length >= 3; }
+    function renderSectionPanel() {
+        const panel = document.getElementById('sectionPanel');
+        panel.innerHTML = '';
+        state.sections.forEach((sec, i) => {
+            const row = document.createElement('div');
+            row.className = 'section-row';
+            row.innerHTML = `
+                <span class="section-title">Sekcja ${i+1}</span>
+                <div class="tile-group">
+                    <div class="tile-box">
+                        <span class="tile-label">Dysz</span>
+                        <div class="tile-arrows">
+                            <button type="button" class="arrow-btn" onclick="changeNozzleCount(${i},-1)">&minus;</button>
+                            <span class="tile-value">${sec.nozzles}</span>
+                            <button type="button" class="arrow-btn" onclick="changeNozzleCount(${i},1)">&plus;</button>
+                        </div>
+                    </div>
+                    <div class="section-btn-space">
+                        ${state.sections.length > 1
+                        ? `<button type="button" class="del-btn" onclick="removeSection(${i})">Usuń</button>` : ""}
+                    </div>
+                </div>
+            `;
+            panel.appendChild(row);
+        });
+        updateAddBtn();
+    }
+    function addSection() {
+        if(state.sections.length >= 3) return;
+        state.sections.unshift({ nozzles: 5 });
+        renderSectionPanel(); renderUI();
+    }
+    function removeSection(idx) {
+        if(state.sections.length > 1) {
+            state.sections.splice(idx,1); renderSectionPanel(); renderUI();
+        }
+    }
+    function changeNozzleCount(idx, delta) {
+        state.sections[idx].nozzles = Math.max(1, Math.min(15, state.sections[idx].nozzles + delta));
+        renderSectionPanel(); renderUI();
+    }
+
+    function setSpeedUnit(unit) {
+        if(unit === state.speedUnit) return;
+        let min = (unit === "kmh") ? 1 : 0.3;
+        let max = (unit === "kmh") ? 20 : 5.5;
+        let val = state.speed;
+        if(unit === "ms" && state.speedUnit === "kmh") { val = val / 3.6; }
+        else if(unit === "kmh" && state.speedUnit === "ms") { val = val * 3.6; }
+        state.speedUnit = unit;
+        state.speed = Math.max(min, Math.min(max, +(val).toFixed(2)));
+        renderUI();
+    }
+    function changeVal(field, delta) {
+        if (field === 'speed') {
+            let step = (state.speedUnit === "kmh") ? 0.1 : 0.05;
+            let min = (state.speedUnit === "kmh") ? 1 : 0.3;
+            let max = (state.speedUnit === "kmh") ? 20 : 5.5;
+            state.speed = Math.max(min, Math.min(max, +(state.speed + delta*step).toFixed(2)));
+            document.getElementById('speedInput').value = state.speed.toFixed(2);
+        } else if (field === 'dose') {
+            state.dose = Math.max(50, Math.min(3000, Math.round(state.dose + delta)));
+            document.getElementById('doseInput').value = state.dose;
+        } else if (field === 'rowSpacing') {
+            state.rowSpacing = Math.max(2.0, Math.min(7.0, +(state.rowSpacing + delta).toFixed(2)));
+            document.getElementById('rowSpacingInput').value = state.rowSpacing;
+        }
+        renderUI();
+    }
+    // Nowe - obsługa regulacji prędkości z poprawnym min/max i step zależnym od jednostki:
+    function setupSpeedButtons() {
+        document.getElementById('speedUpBtn').onclick = function() { changeVal('speed', 1); }
+        document.getElementById('speedDownBtn').onclick = function() { changeVal('speed', -1); }
+    }
+    document.getElementById('speedInput').addEventListener('input', function() {
+        let min = (state.speedUnit === "kmh") ? 1 : 0.3;
+        let max = (state.speedUnit === "kmh") ? 20 : 5.5;
+        let val = parseFloat(this.value.replace(',','.'));
+        if (isNaN(val) || val < min) val = min;
+        if (val > max) val = max;
+        state.speed = val; renderUI();
+    });
+    document.getElementById('doseInput').addEventListener('input', function() {
+        let val = parseFloat(this.value.replace(',','.'));
+        if (isNaN(val) || val < 50) val = 50;
+        if (val > 3000) val = 3000;
+        state.dose = Math.round(val); renderUI();
+    });
+    document.getElementById('rowSpacingInput').addEventListener('input', function() {
+        let val = parseFloat(this.value.replace(',','.'));
+        if (isNaN(val) || val < 2) val = 2;
+        if (val > 7) val = 7;
+        state.rowSpacing = +(val).toFixed(2); renderUI();
+    });
+    // Przełącznik jednostek prędkości
+    document.getElementById('unitKmhBtn').addEventListener('click', function() { setSpeedUnit("kmh"); });
+    document.getElementById('unitMsBtn').addEventListener('click', function() { setSpeedUnit("ms"); });
+    // Funkcje doboru i tabeli
+    function interpolateNozzleFlow(nozzle, pressure) {
+        const minBar = 5, maxBar = 25;
+        if (pressure < minBar) return nozzle.flow5;
+        if (pressure > maxBar) return nozzle.flow25;
+        const lower = Math.floor(pressure), upper = Math.ceil(pressure);
+        const flowLower = nozzle["flow" + lower];
+        const flowUpper = nozzle["flow" + upper];
+        if (lower === upper) return flowLower;
+        return flowLower + (flowUpper - flowLower) * (pressure - lower) / (upper - lower);
+    }
+    function findPressureForNozzle(nozzle, targetFlow) {
+        let minBar = 5, maxBar = 25;
+        let prevBar = minBar, prevFlow = nozzle["flow"+minBar];
+        for(let bar = minBar+1; bar<=maxBar; ++bar) {
+            let flow = nozzle["flow"+bar];
+            if ((prevFlow <= targetFlow && targetFlow <= flow) || (prevFlow >= targetFlow && targetFlow >= flow)) {
+                let t = (targetFlow - prevFlow) / (flow - prevFlow);
+                let found = prevBar + t * (bar - prevBar);
+                if (found >= 5 && found <= 25) return found;
+            }
+            prevBar = bar;
+            prevFlow = flow;
+        }
+        return null;
+    }
+    function renderPressureGuide(Q_nozzle) {
+        let html = `<table class="pressure-table"><tr>
+            <th>Dysza</th><th>Ciśnienie dla Twojej wydajności</th>
+        </tr>`;
+        let anyOk = false;
+        for(const noz of nozzles) {
+            let pressure = findPressureForNozzle(noz, Q_nozzle);
+            if(pressure && pressure>=5 && pressure<=25) {
+                html += `<tr><td style="text-transform:capitalize">${noz.color}</td>
+                    <td class="pressure-ok">${pressure.toFixed(2)} bar</td></tr>`;
+                anyOk = true;
+            } else {
+                html += `<tr><td style="text-transform:capitalize">${noz.color}</td>
+                    <td class="pressure-nok">nieosiągalne</td></tr>`;
+            }
+        }
+        html += "</table>";
+        document.getElementById('pressureGuide').innerHTML = html;
+    }
+    function renderUI() {
+        // Jednostki
+        document.getElementById('unitKmhBtn').classList.toggle('selected', state.speedUnit === 'kmh');
+        document.getElementById('unitMsBtn').classList.toggle('selected', state.speedUnit === 'ms');
+        document.getElementById('speedUnitLabel').textContent = (state.speedUnit === "kmh") ? "km/h" : "m/s";
+        document.getElementById('speedInput').min = (state.speedUnit === "kmh") ? 1 : 0.3;
+        document.getElementById('speedInput').max = (state.speedUnit === "kmh") ? 20 : 5.5;
+        document.getElementById('speedInput').step = (state.speedUnit === "kmh") ? 0.1 : 0.01;
+        document.getElementById('speedInput').value = state.speed.toFixed(2);
+        document.getElementById('doseInput').value = state.dose;
+        document.getElementById('rowSpacingInput').value = state.rowSpacing;
+        let speed_kmh = (state.speedUnit === "kmh") ? state.speed : state.speed * 3.6;
+        const totalSections = state.sections.length;
+        const totalNozzles = state.sections.reduce((sum, s) => sum + s.nozzles, 0) * 2;
+        const Q_total = (state.dose * speed_kmh * state.rowSpacing) / 600;
+        const Q_nozzle = Q_total / totalNozzles;
+        // Informacje sumaryczne
+        let box = document.getElementById('resultBox');
+        box.innerHTML = `Wydajność na jedną dyszę: <b>${Q_nozzle.toFixed(2)} l/min</b><br>
+            Całkowity wydatek: <b>${Q_total.toFixed(2)} l/min</b><br>
+            Liczba dysz: <b>${totalNozzles}</b> (oboje stron)<br>
+            Sekcje: <b>${totalSections}</b> | Dysze/sekcję: <b>${state.sections.map(s=>s.nozzles*2).join(' / ')}</b>`;
+        renderPressureGuide(Q_nozzle);
+        updateAddBtn();
+        setupSpeedButtons();
+    }
+    renderSectionPanel();
+    renderUI();
+    document.getElementById('paramForm').addEventListener('submit', function(e) { e.preventDefault(); });
+    window.changeNozzleCount = changeNozzleCount;
+    window.addSection = addSection;
+    window.removeSection = removeSection;
+    window.changeVal = changeVal;
+</script>
+</body>
+</html>
