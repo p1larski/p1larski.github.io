@@ -70,7 +70,7 @@
             font-weight: 600;
             margin-bottom: 0.23em;
         }
-        .input, input[type="number"] {
+        .input, input[type="number"], input[type="text"] {
             font-size: 1.13em;
             border-radius: 8px;
             border: 1.1px solid var(--border);
@@ -82,220 +82,43 @@
             margin-bottom: 0.05em;
             transition: border .17s, background .17s;
         }
+        input[type="text"] { width: 100%; }
         .input:focus { border-color: var(--primary); outline: none;}
-        .input.invalid {
-            background: var(--invalid);
-            border-color: var(--red);
-            color: var(--red);
-        }
-        .input-tip {
-            font-size: 0.95em;
-            color: var(--red);
-            margin-top: 2px;
-            min-height: 20px;
-            padding-left: 3px;
-        }
-        .param-arrows {
-            display: flex;
-            align-items: center;
-            gap: 0.18em;
-            width: 100%;
-            justify-content: center;
-        }
-        .arrow-btn {
-            background: var(--panel-bg);
-            border: 1.1px solid var(--border);
-            color: var(--accent);
-            border-radius: 50%;
-            width: 34px;
-            height: 34px;
-            font-size: 1.24em;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: background .13s, border-color .13s, color .12s;
-            box-shadow: 0 1px 5px #e2e8f077;
-            touch-action: manipulation;
-        }
-        .arrow-btn:active, .arrow-btn:hover {
-            background: var(--primary);
-            color: #fff;
-            border-color: var(--primary);
-        }
+        .input.invalid { background: var(--invalid); border-color: var(--red); color: var(--red);}
+        .input-tip { font-size: 0.95em; color: var(--red); margin-top: 2px; min-height: 20px; padding-left: 3px;}
         .small-note { color: var(--gray); font-size: .93em;}
-        .section-area {
-            margin-top: 1.15em;
-            margin-bottom: 1.12em;
-            padding: 1.15em .65em 1.05em .65em;
-            border-radius: 17px;
-            background: var(--section-bg);
-            border: 1.2px solid var(--border);
-            box-shadow: 0 2px 16px #b8cbe733;
-        }
-        .section-header-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: .68em;
-            gap: 0.7em;
-        }
-        .section-header {
-            color: var(--accent);
-            font-size: 1.13em;
-            font-weight: 700;
-            letter-spacing: .01em;
-            text-align: left;
-            flex: 1 1 auto;
-        }
-        .add-btn {
-            background: var(--green);
-            color: #fff;
-            font-weight: 700;
-            border: none;
-            border-radius: 8px;
-            padding: 0.34em 1.11em;
-            font-size: 1.08em;
-            cursor: pointer;
-            box-shadow: 0 1px 7px #d1fae0a0;
-            transition: background .13s;
-        }
+        .section-area { margin-top: 1.15em; margin-bottom: 1.12em; padding: 1.15em .65em 1.05em .65em; border-radius: 17px; background: var(--section-bg); border: 1.2px solid var(--border); box-shadow: 0 2px 16px #b8cbe733;}
+        .param-arrows { display: flex; align-items: center; gap: 0.18em; width: 100%; justify-content: center;}
+        .arrow-btn { background: var(--panel-bg); border: 1.1px solid var(--border); color: var(--accent); border-radius: 50%; width: 34px; height: 34px; font-size: 1.24em; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background .13s, border-color .13s, color .12s; box-shadow: 0 1px 5px #e2e8f077; touch-action: manipulation;}
+        .arrow-btn:active, .arrow-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary);}
+        .section-header-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: .68em; gap: 0.7em;}
+        .section-header { color: var(--accent); font-size: 1.13em; font-weight: 700; letter-spacing: .01em; text-align: left; flex: 1 1 auto;}
+        .add-btn { background: var(--green); color: #fff; font-weight: 700; border: none; border-radius: 8px; padding: 0.34em 1.11em; font-size: 1.08em; cursor: pointer; box-shadow: 0 1px 7px #d1fae0a0; transition: background .13s;}
         .add-btn:disabled { opacity: 0.6; cursor: not-allowed; background: #a4c9bc;}
         .add-btn:hover:not(:disabled) { background: #18916d; }
-        .vertical-sections {
-            display: flex;
-            flex-direction: column;
-            gap: .57em;
-            align-items: stretch;
-            margin-bottom: .5em;
-        }
-        .section-row {
-            display: flex;
-            gap: 3em;
-            align-items: center;
-            justify-content: center;
-            background: #f9fcff;
-            border-radius: 10px;
-            border: 1px solid var(--border);
-            padding: .36em .54em .35em .54em;
-            box-shadow: 0 1px 8px #e5eefa12;
-            flex-wrap: wrap;
-        }
-        .section-title {
-            color: var(--accent);
-            font-size: 1em;
-            font-weight: 700;
-            min-width: 62px;
-            margin-right: .18em;
-        }
-        .tile-group {
-            display: flex;
-            gap: 3em;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-        .tile-box {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-width: 58px;
-            background: #f3f6fb;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-            padding: .19em .14em .18em .14em;
-            margin-bottom: 0.09em;
-        }
-        .tile-label {
-            color: var(--gray);
-            font-size: .92em;
-            margin-bottom: 0.10em;
-        }
-        .tile-arrows {
-            display: flex;
-            align-items: center;
-            gap: 0.21em;
-        }
-        .tile-value {
-            font-size: 1.11em;
-            font-weight: bold;
-            color: var(--primary);
-            margin: 0 .44em;
-        }
-        .section-btn-space {
-            min-width: 76px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .del-btn {
-            background: var(--red);
-            color: #fff;
-            border: none;
-            border-radius: 7px;
-            padding: 0.18em .63em;
-            font-size: .97em;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background .14s;
-            margin: 0 .18em;
-        }
+        .vertical-sections { display: flex; flex-direction: column; gap: .57em; align-items: stretch; margin-bottom: .5em;}
+        .section-row { display: flex; gap: 3em; align-items: center; justify-content: center; background: #f9fcff; border-radius: 10px; border: 1px solid var(--border); padding: .36em .54em .35em .54em; box-shadow: 0 1px 8px #e5eefa12; flex-wrap: wrap;}
+        .section-title { color: var(--accent); font-size: 1em; font-weight: 700; min-width: 62px; margin-right: .18em;}
+        .tile-group { display: flex; gap: 3em; flex-wrap: wrap; align-items: center;}
+        .tile-box { display: flex; flex-direction: column; align-items: center; min-width: 58px; background: #f3f6fb; border-radius: 8px; border: 1px solid var(--border); padding: .19em .14em .18em .14em; margin-bottom: 0.09em;}
+        .tile-label { color: var(--gray); font-size: .92em; margin-bottom: 0.10em;}
+        .tile-arrows { display: flex; align-items: center; gap: 0.21em;}
+        .tile-value { font-size: 1.11em; font-weight: bold; color: var(--primary); margin: 0 .44em;}
+        .section-btn-space { min-width: 76px; display: flex; justify-content: center; align-items: center;}
+        .del-btn { background: var(--red); color: #fff; border: none; border-radius: 7px; padding: 0.18em .63em; font-size: .97em; font-weight: 500; cursor: pointer; transition: background .14s; margin: 0 .18em;}
         .del-btn:hover { background: #d21e1e; }
-        .result-box {
-            background: #fafdff;
-            border-radius: 13px;
-            margin-top: 1.17em;
-            padding: .56em .6em .66em .6em;
-            border: 1.2px solid var(--border);
-            font-size: 1.05em;
-            color: var(--accent);
-            box-shadow: 0 1px 10px #d4e8ff44;
-            text-align: center;
-            min-height: 30px;
-            line-height: 1.35em;
-        }
-        .pressure-table {
-            margin: 1.6em 0 0 0;
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.98em;
-        }
-        .pressure-table th, .pressure-table td {
-            padding: 0.36em 0.34em;
-            text-align: center;
-        }
-        .pressure-table th {
-            background: #eaf1fa;
-            color: #222;
-            border-bottom: 1.5px solid #d3e2f5;
-            font-weight: 600;
-            letter-spacing: .01em;
-        }
-        .pressure-table td {
-            border-bottom: 1px solid #eef3f9;
-            color: #273859;
-            transition: background 0.16s;
-        }
+        .result-box { background: #fafdff; border-radius: 13px; margin-top: 1.17em; padding: .56em .6em .66em .6em; border: 1.2px solid var(--border); font-size: 1.05em; color: var(--accent); box-shadow: 0 1px 10px #d4e8ff44; text-align: center; min-height: 30px; line-height: 1.35em;}
+        .pressure-table { margin: 1.6em 0 0 0; width: 100%; border-collapse: collapse; font-size: 0.98em;}
+        .pressure-table th, .pressure-table td { padding: 0.36em 0.34em; text-align: center;}
+        .pressure-table th { background: #eaf1fa; color: #222; border-bottom: 1.5px solid #d3e2f5; font-weight: 600; letter-spacing: .01em;}
+        .pressure-table td { border-bottom: 1px solid #eef3f9; color: #273859; transition: background 0.16s;}
         .pressure-table tr:last-child td { border-bottom: none; }
         .pressure-ok { color: #21a272; font-weight: 700; }
         .pressure-nok { color: #e35b48; font-weight: 500; }
-        .unit-switch { margin-left: 0.5em; user-select: none; display: grid;    
-            gap: 0.15em; align-items: center; }
-        .unit-switch-btn {
-            display: inline-flex;
-            align-items: center;
-            border: 1px solid var(--border);
-            border-radius: 13px;
-            padding: 0.09em 0.5em;
-            background: #fafdff;
-            color: #3764ac;
-            font-size: .99em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background .14s, color .13s;
-        }
+        .unit-switch { margin-left: 0.5em; user-select: none; display: grid; gap: 0.15em; align-items: center; }
+        .unit-switch-btn { display: inline-flex; align-items: center; border: 1px solid var(--border); border-radius: 13px; padding: 0.09em 0.5em; background: #fafdff; color: #3764ac; font-size: .99em; font-weight: 600; cursor: pointer; transition: background .14s, color .13s;}
         .unit-switch-btn.selected { background: var(--primary); color: #fff; border-color: var(--primary);}
         .unit-switch-btn:not(:last-child) { margin-right: .22em; }
-        /* --- Kolory dysz do podświetlenia --- */
         .bg-biały { background: #ffffff !important; color: #17202a !important; }
         .bg-fioletowy { background: #be99e5 !important; color: #241a30 !important;}
         .bg-brązowy { background: #9c7357 !important; color: #fff !important;}
@@ -306,23 +129,115 @@
         .bg-zielony { background: #7be495 !important; color: #124224 !important;}
         .bg-czarny { background: #313233 !important; color: #fff !important;}
         .bg-niebieski { background: #6ec0f6 !important; color: #06395e !important;}
-        /* --- RESPONSYWNOŚĆ --- */
-        @media (max-width: 700px) {
-            .main-container { max-width: 98vw; padding: 1.2em 0.15em 1.2em 0.15em; }
-            #paramForm { padding: 1em; }
+        /* Zapisane konfiguracje – sekcja pozioma */
+        .save-panel-outer {
+            width: 100%;
+            max-width: 460px;
+            margin: 0 auto 1.2em auto;
+        }
+        .save-panel {
+            background: var(--panel-bg);
+            border: 1.3px solid var(--border);
+            border-radius: 17px;
+            box-shadow: 0 1px 10px #d4e8ff44;
+            padding: 1.18em 1em 1em 1em;
+            margin-top: 1em;
+            margin-bottom: 0.7em;
+            display: none;
+            flex-direction: column;
+            gap: 0.85em;
+            animation: fadeIn .5s;
+        }
+        .save-panel.show { display: flex; }
+        .save-list-row {
+            display: grid;
+            flex-wrap: wrap;
+            gap: 0.5em;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            align-items: stretch;
+        }
+        .save-list-item {
+            border: 1px solid var(--border);
+            background: var(--input-bg);
+            border-radius: 11px;
+            margin: 0;
+            padding: .3em .8em;
+            display: flex;
+            align-items: center;
+            gap: .6em;
+            min-width: 0;
+            box-shadow: 0 1px 4px #e2e8f029;
+            flex: 1 1 170px;
+        }
+        .save-list-item .cfg-name { font-weight: 700; color: var(--primary); font-size: 1em; max-width: 90px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+        .save-list-item .cfg-param { font-size: 0.99em; color: var(--label);}
+        .save-list-item .cfg-btns { display: flex; gap: 0.22em; margin-left: auto;}
+        .save-list-item .cfg-btn {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 0.09em .85em;
+            font-size: .97em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background .13s;
+        }
+        .save-list-item .cfg-btn.del { background: var(--red);}
+        .save-list-item .cfg-btn.del:hover { background: #af1414;}
+        .save-list-item .cfg-btn:hover { background: #2365b2;}
+        .save-panel-empty {
+            color: var(--gray);
+            text-align: center;
+            font-size: 0.97em;
+            margin: 0.6em 0;
+        }
+        .save-panel-header-row {
+            display: flex;
+            align-items: center;
+            gap: 0.9em;
+            justify-content: center;
+            font-size: 32px;
+        }
+        .save-panel-title {
+            color: var(--accent);
+            font-weight: 800;
+            font-size: 1.09em;
+            flex: 1 1 auto;
+            margin: 0;
+        }
+        .close-save-panel {
+            background: none;
+            border: none;
+            font-size: 1.3em;
+            color: var(--red);
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0 .3em;
+        }
+        .open-save-panel-btn {
+            background: var(--primary);
+            color: #fff;
+            font-weight: 700;
+            border: none;
+            border-radius: 9px;
+            padding: 0.38em 1.1em;
+            font-size: 1.08em;
+            cursor: pointer;
+            box-shadow: 0 1px 7px #d1fae0a0;
+            margin: 2em auto 0.8em auto;
+            display: block;
+            transition: background .13s;
+        }
+        .open-save-panel-btn:hover { background: #233c70;}
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-15px);}
+            to { opacity: 1; transform: translateY(0);}
         }
         @media (max-width: 540px) {
-            h1 { font-size: 1em;}
-            .main-container { border-radius: 0; padding: .6em 0.03em .6em 0.03em; }
-            .row { gap: .16em; margin-bottom: .4em;}
-            .col { min-width: 0; max-width: none; width: 97vw;}
-            .section-row { gap: .13em; }
-            .section-header { font-size: .98em;}
-            .tile-group { flex-wrap: wrap; gap: .10em;}
-            .add-btn { padding: 0.22em .61em; font-size: 0.99em;}
-            .tile-label { font-size: .87em;}
-            .result-box { font-size: 0.95em; padding: .32em .12em .42em .12em;}
-            .pressure-table th, .pressure-table td { font-size: 0.95em; padding: 0.19em 0.05em;}
+            .main-container, .save-panel-outer { max-width: 100vw; border-radius: 0; }
         }
     </style>
 </head>
@@ -377,20 +292,28 @@
         </div>
         <div class="result-box" id="resultBox"></div>
         <div id="pressureGuide"></div>
+         <div class="save-panel-outer">
+            <div class="save-panel" id="savePanel">
+                <div class="save-panel-header-row" style="display: none;">
+                    <button type="button" class="close-save-panel" id="closeSavePanelBtn" title="Zamknij">&times;</button>
+                </div>
+                <div style="display:flex; gap:0.5em; margin-bottom:0.8em;">
+                    <input type="text" id="fluidNameInput" class="input" placeholder="Nazwa konfiguracji (wymagane)">
+                    <button type="button" class="add-btn" id="saveConfigBtn" disabled>Zapisz konfiguracje</button>
+                </div>
+                    <div class="save-panel-title">Zapisane konfiguracje</div>
+                <ul class="save-list-row" id="savedList"></ul>
+                <div class="save-panel-empty" id="emptyListTip" style="display:none;">Brak zapisanych konfiguracji</div>
+            </div>
+        </div>
+        <button type="button" class="open-save-panel-btn" id="toggleSavePanelBtn">Zapis konfiguracji</button>
     </form>
 </div>
 <script>
     const nozzleColorClass = {
-        "biały": "bg-biały",
-        "fioletowy": "bg-fioletowy",
-        "brązowy": "bg-brązowy",
-        "żółty": "bg-żółty",
-        "pomarańczowy": "bg-pomarańczowy",
-        "czerwony": "bg-czerwony",
-        "szary": "bg-szary",
-        "zielony": "bg-zielony",
-        "czarny": "bg-czarny",
-        "niebieski": "bg-niebieski"
+        "biały": "bg-biały", "fioletowy": "bg-fioletowy", "brązowy": "bg-brązowy", "żółty": "bg-żółty",
+        "pomarańczowy": "bg-pomarańczowy", "czerwony": "bg-czerwony", "szary": "bg-szary",
+        "zielony": "bg-zielony", "czarny": "bg-czarny", "niebieski": "bg-niebieski"
     };
     const nozzles = [
       {color:"biały",flow5:0.27,flow6:0.29,flow7:0.32,flow8:0.34,flow9:0.36,flow10:0.38,flow11:0.39,flow12:0.41,flow13:0.43,flow14:0.44,flow15:0.46,flow16:0.47,flow17:0.48,flow18:0.50,flow19:0.51,flow20:0.52,flow21:0.54,flow22:0.55,flow23:0.56,flow24:0.57,flow25:0.58},
@@ -409,6 +332,7 @@
         sections: [ { nozzles: 5 }, { nozzles: 5 } ]
     };
 
+    // --- Sekcje, walidacja, parametry (z Twojej wersji) ---
     function updateAddBtn() { document.getElementById('addBtn').disabled = state.sections.length >= 3; }
     function renderSectionPanel() {
         const panel = document.getElementById('sectionPanel');
@@ -437,7 +361,6 @@
         });
         updateAddBtn();
     }
-    // --- Zmiana: nowa sekcja DODAWANA NA KONIEC! ---
     function addSection() {
         if(state.sections.length >= 3) return;
         state.sections.push({ nozzles: 5 });
@@ -483,7 +406,8 @@
         document.getElementById('speedUpBtn').onclick = function() { changeVal('speed', 1); }
         document.getElementById('speedDownBtn').onclick = function() { changeVal('speed', -1); }
     }
-    // --- INPUTY: walidacja i podpowiedzi ---
+
+    // --- INPUTY: walidacja i podpowiedzi (Twój kod) ---
     // DAWKA
     const doseInput = document.getElementById('doseInput');
     doseInput.addEventListener('input', function() {
@@ -613,7 +537,6 @@
             prevBar = bar;
             prevFlow = flow;
         }
-        // poza zakresem
         if(targetFlow < nozzle.flow5) return "<5";
         if(targetFlow > nozzle.flow25) return ">25";
         return null;
@@ -662,7 +585,6 @@
         const totalNozzles = state.sections.reduce((sum, s) => sum + s.nozzles, 0) * 2;
         const Q_total = (state.dose * speed_kmh * state.rowSpacing) / 600;
         const Q_nozzle = Q_total / totalNozzles;
-        // Informacje sumaryczne
         let box = document.getElementById('resultBox');
         box.innerHTML = `Wydajność na jedną dyszę: <b>${Q_nozzle.toFixed(2)} l/min</b><br>
             Całkowity wydatek: <b>${Q_total.toFixed(1)} l/min</b><br>
@@ -679,6 +601,113 @@
     window.addSection = addSection;
     window.removeSection = removeSection;
     window.changeVal = changeVal;
+
+    // ----------------------
+    //  ZAPISANE KONFIGURACJE
+    // ----------------------
+
+    // ELEMENTY
+    const savePanel = document.getElementById('savePanel');
+    const openSaveBtn = document.getElementById('toggleSavePanelBtn');
+    const closeSaveBtn = document.getElementById('closeSavePanelBtn');
+    const savedList = document.getElementById('savedList');
+    const saveBtn = document.getElementById('saveConfigBtn');
+    const fluidNameInput = document.getElementById('fluidNameInput');
+    const emptyListTip = document.getElementById('emptyListTip');
+
+    // Panel otwieranie/zamykanie
+    openSaveBtn.addEventListener('click', function() {
+        if(!savePanel.classList.contains('show')) {
+            savePanel.classList.add('show');
+            openSaveBtn.textContent = "Zamknij liste konfiguracji";
+        fluidNameInput.focus();
+        renderSavedList();
+        } else {
+            openSaveBtn.textContent = "Zapis konfiguracji";
+            savePanel.classList.remove('show');
+        }
+    });
+    closeSaveBtn.addEventListener('click', function() {
+        savePanel.classList.remove('show');
+    });
+
+    // Zapis do localStorage (JSON)
+    function getSavedConfigs() {
+        let arr = [];
+        try { arr = JSON.parse(localStorage.getItem("sprayerConfigs")||"[]"); }
+        catch { arr = []; }
+        return Array.isArray(arr) ? arr : [];
+    }
+    function setSavedConfigs(arr) {
+        localStorage.setItem("sprayerConfigs", JSON.stringify(arr));
+    }
+
+    // Walidacja pola nazwy
+    fluidNameInput.addEventListener('input', function() {
+        saveBtn.disabled = !fluidNameInput.value.trim();
+    });
+
+    // ZAPIS KONFIGURACJI
+    saveBtn.addEventListener('click', function() {
+        let name = fluidNameInput.value.trim();
+        if (!name) return;
+        // Podstawowe parametry do zapisu
+        let cfg = {
+            name,
+            dose: state.dose,
+            speed: state.speed,
+            speedUnit: state.speedUnit,
+            rowSpacing: state.rowSpacing,
+            sections: JSON.parse(JSON.stringify(state.sections))
+        };
+        // Unikamy duplikatów po nazwie
+        let arr = getSavedConfigs().filter(x => x.name !== name);
+        arr.unshift(cfg); // Nowa na początku
+        setSavedConfigs(arr);
+        fluidNameInput.value = '';
+        saveBtn.disabled = true;
+        renderSavedList();
+    });
+
+    // RENDER LISTY ZAPISANYCH
+    function renderSavedList() {
+        let arr = getSavedConfigs();
+        savedList.innerHTML = "";
+        if (!arr.length) {
+            emptyListTip.style.display = "";
+            return;
+        }
+        emptyListTip.style.display = "none";
+        for (let cfg of arr) {
+            let el = document.createElement('li');
+            el.className = 'save-list-item';
+            el.innerHTML = `<span class="cfg-name" title="${cfg.name}">${cfg.name}</span>
+                <span class="cfg-param">${cfg.dose} l/ha</span>
+                <span class="cfg-param">${cfg.speed} ${cfg.speedUnit === 'kmh' ? 'km/h' : 'm/s'}</span>
+                <div class="cfg-btns">
+                    <button class="cfg-btn" type="button">Załaduj</button>
+                    <button class="cfg-btn del" type="button">Usuń</button>
+                </div>`;
+            // Załaduj
+            el.querySelector('.cfg-btn').onclick = function() {
+                state.dose = cfg.dose;
+                state.speed = cfg.speed;
+                state.speedUnit = cfg.speedUnit;
+                state.rowSpacing = cfg.rowSpacing;
+                state.sections = JSON.parse(JSON.stringify(cfg.sections));
+                renderSectionPanel();
+                renderUI();
+            };
+            // Usuń
+            el.querySelector('.cfg-btn.del').onclick = function() {
+                setSavedConfigs(getSavedConfigs().filter(x => x.name !== cfg.name));
+                renderSavedList();
+            };
+            savedList.appendChild(el);
+        }
+    }
+    // Po załadowaniu od razu wyświetl zapisane (jeśli panel otwarty)
+    if(savePanel.classList.contains('show')) renderSavedList();
 </script>
 </body>
 </html>
